@@ -1,6 +1,15 @@
+/*
+ * @Description:
+ * @Author: mengjiaqi
+ * @Date: 2022-11-14 16:01:40
+ * @LastEditors: mengjiaqi
+ * @LastEditTime: 2022-11-15 10:50:57
+ * @FilePath: \Geeker-Admin\src\stores\modules\auth.ts
+ */
 import { defineStore } from "pinia";
 import { AuthState } from "@/stores/interface";
-import { getAuthButtonListApi, getAuthMenuListApi } from "@/api/modules/login";
+//getAuthButtonListApi
+import { getAuthMenuListApi } from "@/api/modules/login";
 import { getKeepAliveRouterName, getShowMenuList, getAllBreadcrumbList } from "@/utils/util";
 import piniaPersistConfig from "@/config/piniaPersist";
 
@@ -8,13 +17,13 @@ import piniaPersistConfig from "@/config/piniaPersist";
 export const AuthStore = defineStore({
 	id: "AuthState",
 	state: (): AuthState => ({
-		authButtonList: {},
+		// authButtonList: {},
 		// menuList 作为动态路由，不会做持久化存储
 		authMenuList: []
 	}),
 	getters: {
 		// 按钮权限列表
-		authButtonListGet: state => state.authButtonList,
+		// authButtonListGet: state => state.authButtonList,
 		// 后端返回的菜单列表
 		authMenuListGet: state => state.authMenuList,
 		// 后端返回的菜单列表 ==> 左侧菜单栏渲染，需要去除 isHide == true
@@ -26,10 +35,10 @@ export const AuthStore = defineStore({
 	},
 	actions: {
 		// getAuthButtonList
-		async getAuthButtonList() {
-			const { data } = await getAuthButtonListApi();
-			this.authButtonList = data;
-		},
+		// async getAuthButtonList() {
+		// 	const { data } = await getAuthButtonListApi();
+		// 	this.authButtonList = data;
+		// },
 		// getAuthMenuList
 		async getAuthMenuList() {
 			const { data } = await getAuthMenuListApi();

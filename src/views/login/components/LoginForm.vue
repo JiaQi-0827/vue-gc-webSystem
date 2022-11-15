@@ -36,7 +36,8 @@ import { HOME_URL } from "@/config/config";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
-import md5 from "js-md5";
+// import { log } from "console";
+// import md5 from "js-md5";
 
 const router = useRouter();
 const tabsStore = TabsStore();
@@ -59,9 +60,9 @@ const login = (formEl: FormInstance | undefined) => {
 		loading.value = true;
 		try {
 			// 1.执行登录接口
-			const { data } = await loginApi({ ...loginForm, password: md5(loginForm.password) });
+			const data = await loginApi({ ...loginForm, password: loginForm.password });
 			globalStore.setToken(data.token);
-
+			console.log(data);
 			// 2.添加动态路由
 			await initDynamicRouter();
 

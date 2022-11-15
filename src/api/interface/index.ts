@@ -6,6 +6,7 @@ export interface Result {
 
 // * 请求响应参数(包含data)
 export interface ResultData<T = any> extends Result {
+	token: string;
 	data: T;
 }
 
@@ -29,7 +30,10 @@ export namespace Login {
 		username: string;
 		password: string;
 	}
-	export interface ResLogin {
+	export interface ResponseLogin {
+		data: {
+			token: string;
+		};
 		token: string;
 	}
 	export interface ResAuthButtons {

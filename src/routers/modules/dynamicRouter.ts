@@ -1,3 +1,11 @@
+/*
+ * @Description:
+ * @Author: mengjiaqi
+ * @Date: 2022-11-14 16:01:40
+ * @LastEditors: mengjiaqi
+ * @LastEditTime: 2022-11-15 10:55:20
+ * @FilePath: \Geeker-Admin\src\routers\modules\dynamicRouter.ts
+ */
 import router from "@/routers/index";
 import { getFlatArr } from "@/utils/util";
 import { LOGIN_URL } from "@/config/config";
@@ -16,7 +24,7 @@ export const initDynamicRouter = async () => {
 		// 1.获取菜单列表 && 按钮权限
 		const authStore = AuthStore();
 		await authStore.getAuthMenuList();
-		await authStore.getAuthButtonList();
+		// await authStore.getAuthButtonList();
 
 		// 2.判断当前用户有没有菜单权限
 		if (!authStore.authMenuListGet.length) {

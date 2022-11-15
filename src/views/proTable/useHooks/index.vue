@@ -42,10 +42,10 @@
 		<div class="card table-box">
 			<div class="table-header">
 				<div class="header-button-lf">
-					<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add">新增用户</el-button>
-					<el-button type="primary" :icon="Upload" plain @click="batchAdd" v-if="BUTTONS.batchAdd">批量添加用户</el-button>
-					<el-button type="primary" :icon="Download" plain @click="downloadFile" v-if="BUTTONS.export">导出用户数据</el-button>
-					<el-button type="danger" :icon="Delete" plain :disabled="!isSelected" @click="batchDelete" v-if="BUTTONS.batchDelete">
+					<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
+					<el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
+					<el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+					<el-button type="danger" :icon="Delete" plain :disabled="!isSelected" @click="batchDelete" Delete>
 						批量删除用户
 					</el-button>
 				</div>
@@ -71,20 +71,14 @@
 						:active-value="1"
 						:inactive-value="0"
 						@change="changeStatus($event, scope.row)"
-						v-if="BUTTONS.status"
 					/>
-					<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
-						{{ scope.row.status === 1 ? "启用" : "禁用" }}
-					</el-tag>
 				</el-table-column>
 				<el-table-column label="操作" fixed="right" width="330" align="center" v-slot="scope">
-					<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)" v-if="BUTTONS.view">查看</el-button>
-					<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)" v-if="BUTTONS.edit"
-						>编辑</el-button
-					>
-					<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)" v-if="BUTTONS.reset">重置密码</el-button>
-					<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)" v-if="BUTTONS.delete">删除</el-button>
-					<span v-if="!BUTTONS.view && !BUTTONS.edit && !BUTTONS.reset && !BUTTONS.delete">--</span>
+					<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
+					<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
+					<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
+					<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
+					<span>--</span>
 				</el-table-column>
 				<template #empty>
 					<div class="table-empty">
@@ -117,7 +111,7 @@ import { User } from "@/api/interface";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
-import { useAuthButtons } from "@/hooks/useAuthButtons";
+// import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { useTable } from "@/hooks/useTable";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
@@ -166,7 +160,7 @@ const { tableData, pageable, searchParam, searchInitParam, getTableList, search,
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
 
 // 页面按钮权限
-const { BUTTONS } = useAuthButtons();
+// const { BUTTONS } = useAuthButtons();
 
 // 设置搜索表单默认参数
 searchInitParam.value = { createTime: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"] };

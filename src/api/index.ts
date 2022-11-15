@@ -74,6 +74,7 @@ class RequestHttp {
 				} else if (data.code !== 200) {
 					ElMessage.error(data.msg);
 				}
+				return data;
 				// if (data.code == ResultEnum.OVERDUE) {
 				// 	ElMessage.error(data.msg);
 				// 	globalStore.setToken("");
@@ -86,7 +87,6 @@ class RequestHttp {
 				// 	return Promise.reject(data);
 				// }
 				// * 成功请求（在页面上除非特殊情况，否则不用处理失败逻辑）
-				return data;
 			},
 			async (error: AxiosError) => {
 				const { response } = error;

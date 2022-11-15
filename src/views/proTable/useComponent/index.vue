@@ -3,17 +3,10 @@
 		<ProTable ref="proTable" :columns="columns" :requestApi="getUserList" :initParam="initParam" :dataCallback="dataCallback">
 			<!-- 表格 header 按钮 -->
 			<template #tableHeader="scope">
-				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add">新增用户</el-button>
-				<el-button type="primary" :icon="Upload" plain @click="batchAdd" v-if="BUTTONS.batchAdd">批量添加用户</el-button>
-				<el-button type="primary" :icon="Download" plain @click="downloadFile" v-if="BUTTONS.export">导出用户数据</el-button>
-				<el-button
-					type="danger"
-					:icon="Delete"
-					plain
-					:disabled="!scope.isSelected"
-					@click="batchDelete(scope.selectedListIds)"
-					v-if="BUTTONS.batchDelete"
-				>
+				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
+				<el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
+				<el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+				<el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.selectedListIds)">
 					批量删除用户
 				</el-button>
 			</template>
@@ -30,11 +23,10 @@
 					:active-value="1"
 					:inactive-value="0"
 					@click="changeStatus(scope.row)"
-					v-if="BUTTONS.status"
 				/>
-				<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
+				<!-- <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
 					{{ scope.row.status === 1 ? "启用" : "禁用" }}
-				</el-tag>
+				</el-tag> -->
 			</template>
 			<!-- 表格操作 -->
 			<template #operation="scope">
@@ -56,7 +48,7 @@ import { User } from "@/api/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
-import { useAuthButtons } from "@/hooks/useAuthButtons";
+// import { useAuthButtons } from "@/hooks/useAuthButtons";
 import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
@@ -93,7 +85,7 @@ const dataCallback = (data: any) => {
 };
 
 // 页面按钮权限
-const { BUTTONS } = useAuthButtons();
+// const { BUTTONS } = useAuthButtons();
 
 // 自定义渲染头部(使用tsx语法)
 const renderHeader = (scope: any) => {

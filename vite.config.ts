@@ -18,7 +18,7 @@ import importToCDN from "vite-plugin-cdn-import";
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 	const env = loadEnv(mode, process.cwd());
 	const viteEnv = wrapperEnv(env);
-	// const url = import.meta.env.VITE_API_URL;
+
 	return {
 		base: "./",
 		resolve: {
@@ -39,16 +39,16 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			host: "0.0.0.0",
 			port: viteEnv.VITE_PORT,
 			open: viteEnv.VITE_OPEN,
-			cors: true
+			cors: true,
 			// 代理跨域（mock 不需要配置跨域，直接能访问，这里只是个示例）
-			// proxy: {
-			// 	"/api": {
-			// 		// target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0", // fastmock
-			// 		target: import.meta.env.VITE_API_URL, // easymock
-			// 		changeOrigin: true,
-			// 		rewrite: path => path.replace(/^\/api/, "")
-			// 	}
-			// }
+			proxy: {
+				"/api": {
+					// target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0", // fastmock
+					target: "http://39.106.7.249:8080", // easymock
+					changeOrigin: true,
+					rewrite: path => path.replace(/^\/api/, "")
+				}
+			}
 		},
 		plugins: [
 			vue(),
