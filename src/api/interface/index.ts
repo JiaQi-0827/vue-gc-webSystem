@@ -54,32 +54,7 @@ export namespace User {
 		createTime: string[];
 		status: number;
 	}
-	export interface ResUserList {
-		id: string;
-		username: string;
-		gender: string;
-		age: number;
-		idCard: string;
-		email: string;
-		address: string;
-		createTime: string;
-		status: number;
-		avatar: string;
-		children?: ResUserList[];
-	}
-	export interface ResStatus {
-		userLabel: string;
-		userValue: number;
-	}
-	export interface ResGender {
-		genderLabel: string;
-		genderValue: number;
-	}
-	export interface ResDepartment {
-		id: string;
-		name: string;
-		children?: ResDepartment[];
-	}
+	export type ReqGetMaterilList = ReqPage;
 }
 
 // * 文件上传模块
