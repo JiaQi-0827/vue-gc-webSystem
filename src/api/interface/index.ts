@@ -8,6 +8,8 @@ export interface Result {
 export interface ResultData<T = any> extends Result {
 	token: string;
 	data: T;
+	rows: any;
+	total: number;
 }
 
 // * 分页响应参数
@@ -54,7 +56,11 @@ export namespace User {
 		createTime: string[];
 		status: number;
 	}
-	export type ReqGetMaterilList = ReqPage;
+}
+export interface ReqGetMaterilList {
+	code: number;
+	rows: any;
+	total: Number;
 }
 
 // * 文件上传模块
@@ -62,4 +68,20 @@ export namespace Upload {
 	export interface ResFileUrl {
 		fileUrl: string;
 	}
+}
+
+export interface meterilRow {
+	createBy: null;
+	createTime: null;
+	updateBy: null;
+	updateTime: null;
+	remark: null;
+	id: string;
+	name: String;
+	pid: string;
+	description: String;
+}
+export interface meterCreate {
+	msg: String;
+	code: number;
 }

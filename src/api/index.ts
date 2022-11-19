@@ -47,7 +47,7 @@ class RequestHttp {
 				// * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
 				config.headers!.noLoading || showFullScreenLoading();
 				const token: string = globalStore.token;
-				return { ...config, headers: { ...config.headers, token: token } };
+				return { ...config, headers: { ...config.headers, Authorization: "Bearer " + token } };
 			},
 			(error: AxiosError) => {
 				return Promise.reject(error);
@@ -74,6 +74,7 @@ class RequestHttp {
 				} else if (data.code !== 200) {
 					ElMessage.error(data.msg);
 				}
+				// console.log(data);
 				return data;
 				// if (data.code == ResultEnum.OVERDUE) {
 				// 	ElMessage.error(data.msg);

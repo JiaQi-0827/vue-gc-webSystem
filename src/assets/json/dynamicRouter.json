@@ -28,6 +28,20 @@
 				"isAffix": true,
 				"isKeepAlive": true
 			}
+		},
+		{
+			"path": "/home/create",
+			"name": "materilCreate",
+			"component": "/gcList/materilCreate",
+			"meta": {
+				"icon": "Menu",
+				"title": "材料新增",
+				"isLink": "",
+				"isHide": true,
+				"isFull": false,
+				"isAffix": true,
+				"isKeepAlive": false
+			}
 		}
 	],
 	"msg": "成功"
