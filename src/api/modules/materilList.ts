@@ -1,4 +1,4 @@
-import { ReqGetMaterilList, meterCreate } from "@/api/interface/index";
+import { ReqGetMaterilList, meterCreate, meterDetails } from "@/api/interface/index";
 // import { PORT1 } from "@/api/config/servicePort";
 // import qs from "qs";
 import http from "@/api";
@@ -16,6 +16,13 @@ export const materilList = (params: object | undefined) => {
 // * 材料列表新建接口
 export const materilCreate = (data: object | undefined) => {
 	return http.post<meterCreate>(`/system/makings`, data);
+};
+/**
+ * @name 材料列表 详情
+ */
+// * 材料列表 详情
+export const materilDetails = (data: string | any) => {
+	return http.get<meterDetails>(`/system/makings/${data}`);
 };
 /**
  * @name 材料列表修改

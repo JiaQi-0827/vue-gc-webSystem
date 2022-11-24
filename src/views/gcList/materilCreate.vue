@@ -1,17 +1,24 @@
 <template>
 	<div class="home card">
-		<el-form ref="ruleFormRef" :model="materilForm" :rules="rules" label-width="120px" class="demo-ruleForm" status-icon>
+		<el-form
+			ref="ruleFormRef"
+			:model="materilFormState.materilForm"
+			:rules="rules"
+			label-width="120px"
+			class="demo-ruleForm"
+			status-icon
+		>
 			<el-form-item label="材料名称" prop="name">
-				<el-input v-model="materilForm.name" />
+				<el-input v-model="materilFormState.materilForm.name" />
 			</el-form-item>
 
 			<el-form-item label="材料描述" prop="description">
-				<el-input v-model="materilForm.description" type="textarea" />
+				<el-input v-model="materilFormState.materilForm.description" type="textarea" />
 			</el-form-item>
 			<el-form-item label="创建时间" required>
 				<el-form-item prop="date">
 					<el-date-picker
-						v-model="materilForm.createTime"
+						v-model="materilFormState.materilForm.createTime"
 						type="datetime"
 						format="YYYY-MM-DD HH:mm:ss"
 						value-format="YYYY-MM-DD HH:mm:ss"
@@ -30,10 +37,11 @@
 	</div>
 </template>
 <script setup lang="ts" name="materilCreate">
-import { materilCreate } from "@/api/modules/materilList";
+import { materilCreate, materilDetails } from "@/api/modules/materilList";
 import type { FormInstance } from "element-plus";
 import { reactive, ref } from "vue";
 import { useRoute } from "vue-router";
+
 const route = useRoute();
 const ruleFormRef = ref<FormInstance>();
 const rules = {
@@ -41,21 +49,30 @@ const rules = {
 	description: { required: true, message: "请输入材料描述", trigger: "blur" },
 	createTime: { type: "date", required: true, message: "请选择创建时间", trigger: "change" }
 };
-
-let materilForm = reactive({
-	name: "",
-	createTime: "",
-	description: "",
-	pid: route.query.pid ? route.query.pid : "0"
+const detailsApi = async () => {
+	const id = route.query.id ? route.query.id : undefined;
+	if (id) {
+		const { data } = await materilDetails(id);
+		materilFormState.materilForm = data as any;
+	}
+};
+detailsApi();
+let materilFormState = reactive({
+	materilForm: {
+		name: "",
+		createTime: "",
+		description: "",
+		pid: route.query.pid ? route.query.pid : "0"
+	}
 });
 
 const submitForm = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.validate(async (valid, fields) => {
 		if (valid) {
-			const { code } = await materilCreate(materilForm);
+			const { code } = await materilCreate(materilFormState.materilForm);
 			if (Number(code) == 200) {
-				materilForm = {
+				materilFormState.materilForm = {
 					name: "",
 					createTime: "",
 					description: "",

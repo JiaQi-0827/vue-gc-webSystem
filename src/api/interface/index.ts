@@ -85,3 +85,18 @@ export interface meterCreate {
 	msg: String;
 	code: number;
 }
+export interface meterDetails {
+	msg: String;
+	code: number;
+	data: {
+		createBy: null;
+		createTime: null;
+		description: string;
+		id: string;
+		name: string;
+		pid: string;
+		remark: null;
+		updateBy: null;
+		updateTime: null;
+	};
+}
