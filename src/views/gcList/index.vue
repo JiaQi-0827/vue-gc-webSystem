@@ -65,7 +65,6 @@ const handleClickAdd = () => {
 	});
 };
 const handleOnclickEdit = (row: meterilRow) => {
-	console.log(row.name);
 	router.push({
 		path: "/home/create",
 		query: { id: row.id, pid: row.pid }
@@ -86,7 +85,6 @@ const handleOnclickDel = (row: meterilRow) => {
 	})
 		.then(() => {
 			materilDels(row.id).then(res => {
-				console.log(res);
 				if (Number(res.code) == 200) {
 					init();
 					ElMessage({
